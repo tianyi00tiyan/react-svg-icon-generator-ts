@@ -1,8 +1,9 @@
 /* eslint-disable */
 // {{comment}}
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const iconList = [
+const iconList: Array<string> = [
     {%- for icon in icons %}
     '{{icon.name}}',
     {%- endfor %}
@@ -12,7 +13,7 @@ interface IconProps {
     color?: string;
     className?: string;
     height?: number;
-    kind?: string;
+    kind: string;
     onClick?: () => void;
     preview?: boolean;
     size?: number;
@@ -24,22 +25,22 @@ export default class Icon extends React.Component<IconProps,{}> {
 
     static propTypes = {
         {%- if useColorProp %}
-        color: React.PropTypes.string,
+        color: PropTypes.string,
         {%- endif %}
-        className: React.PropTypes.string,
-        height: React.PropTypes.number,
-        kind: React.PropTypes.oneOf(iconList).isRequired,
-        onClick: React.PropTypes.func,
-        preview: React.PropTypes.bool,
-        size: React.PropTypes.number,
-        style: React.PropTypes.oneOfType([
-            React.PropTypes.array,
-            React.PropTypes.object
+        className: PropTypes.string,
+        height: PropTypes.number,
+        kind: PropTypes.oneOf(iconList).isRequired,
+        onClick: PropTypes.func,
+        preview: PropTypes.bool,
+        size: PropTypes.number,
+        style: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object
         ]),
-        width: React.PropTypes.number,
-        wrapperStyle: React.PropTypes.oneOfType([
-            React.PropTypes.array,
-            React.PropTypes.object
+        width: PropTypes.number,
+        wrapperStyle: PropTypes.oneOfType([
+            PropTypes.array,
+            PropTypes.object
         ])
     };
 
@@ -60,7 +61,7 @@ export default class Icon extends React.Component<IconProps,{}> {
         return (<div>{ iconList.map(kind => this.renderPreviewKind(kind)) }</div>);
     }
 
-    renderIcon(kind) {
+    renderIcon(kind: string) {
         const { wrapperStyle } = this.props;
         if (wrapperStyle) {
             return (<div style={wrapperStyle}>{ this.getIcon(kind) }</div>);
@@ -68,7 +69,7 @@ export default class Icon extends React.Component<IconProps,{}> {
         return this.getIcon(kind);
     }
 
-    renderPreviewKind(kind) {
+    renderPreviewKind(kind: string) {
         return (
             <div key={kind}>
                 <h3>&lt;Icon kind="{kind}" /&gt;</h3>
@@ -77,7 +78,7 @@ export default class Icon extends React.Component<IconProps,{}> {
         );
     }
 
-    getIcon(kind) {
+    getIcon(kind: string) {
         const { {{ 'color, ' if useColorProp }} height, onClick, size, style, width, className } = this.props;
 
         switch (kind) {

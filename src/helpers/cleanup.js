@@ -25,7 +25,7 @@ module.exports.cleanupName = (name) => {
 
 module.exports.cleanupSvg = (svg, keepFillColor) => {
   const cleanedSvg = _basicCleanup(svg)
-    .replace(/viewBox/, '{...rest} height={height || size} width={width || size} onClick={onClick} style={style} className={className} viewBox');
+    .replace(/viewBox/, ' height={height || size} width={width || size} onClick={onClick} style={style} className={className} viewBox');
 
   return keepFillColor
     ? cleanedSvg
